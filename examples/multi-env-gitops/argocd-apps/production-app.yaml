@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-production
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  
+  source:
+    repoURL: https://github.com/somkheartk/aws-gitops.git
+    targetRevision: HEAD
+    path: examples/multi-env-gitops/overlays/production
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp-production
+  
+  syncPolicy:
+    # Manual sync for production - requires approval
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 5m
