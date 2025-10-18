@@ -20,6 +20,8 @@ jobs:
   validate:
     name: Validate Kubernetes Manifests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -46,6 +48,9 @@ jobs:
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     
     steps:
       - name: Checkout code
@@ -71,6 +76,9 @@ jobs:
     needs: [validate, security-scan]
     if: github.ref == 'refs/heads/develop'
     environment: development
+    permissions:
+      contents: read
+      id-token: write
     
     steps:
       - name: Checkout code
@@ -101,6 +109,9 @@ jobs:
     needs: [validate, security-scan]
     if: github.ref == 'refs/heads/main'
     environment: staging
+    permissions:
+      contents: read
+      id-token: write
     
     steps:
       - name: Checkout code
@@ -138,6 +149,9 @@ jobs:
     environment: 
       name: production
       url: https://myapp.production.example.com
+    permissions:
+      contents: read
+      id-token: write
     
     steps:
       - name: Checkout code
