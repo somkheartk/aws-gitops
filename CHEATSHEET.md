@@ -24,9 +24,10 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 
-# Terraform
-wget https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip
-unzip terraform_1.6.0_linux_amd64.zip
+# Terraform (check latest version at https://www.terraform.io/downloads)
+TERRAFORM_VERSION="1.6.0"  # Update this to latest version
+wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 sudo mv terraform /usr/local/bin/
 
 # ArgoCD CLI

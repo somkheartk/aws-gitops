@@ -1,4 +1,4 @@
-# AWS GitOps Tutorial Overview (ภาพรวมบทเรียน AWS GitOps)
+# AWS GitOps Tutorial Overview (สอนและทำตัวอย่าง AWS GitOps)
 
 ## 📖 What's Included (สิ่งที่รวมอยู่ในคู่มือนี้)
 
@@ -90,7 +90,7 @@ This comprehensive tutorial provides everything you need to implement GitOps on 
 
 **Best for:** Production deployments, infrastructure automation
 
-**Time to complete:** ~20-25 minutes
+**Time to complete:** ~45-60 minutes (including EKS cluster creation which takes 15-20 minutes)
 
 **Files:**
 - `README.md` - Detailed guide
@@ -102,7 +102,12 @@ This comprehensive tutorial provides everything you need to implement GitOps on 
 - `outputs.tf` - Output values
 - `terraform.tfvars.example` - Example variables
 
-**Cost estimate:** ~$150-200/month
+**Cost estimate:** ~$200-300/month
+- EKS Control Plane: $73/month
+- 2x t3.medium nodes: ~$60/month
+- NAT Gateway: ~$45/month
+- Load Balancers: ~$20-40/month
+- Data transfer and storage: ~$10-20/month
 
 ---
 
@@ -164,7 +169,11 @@ multi-env-gitops/
 - Automated testing and deployment
 - Cost optimization strategies
 
-**Cost estimate:** Much lower than EKS (~$5-50/month depending on usage)
+**Cost estimate:** Much lower than EKS
+- Low traffic (< 1M requests): ~$5-10/month
+- Medium traffic (1-10M requests): ~$20-40/month  
+- High traffic (10M+ requests): $50+/month
+- Plus API Gateway costs: ~$3.50 per million requests
 
 ---
 
@@ -194,8 +203,8 @@ multi-env-gitops/
 | Feature | Simple EKS | Terraform EKS | Multi-Env | Serverless |
 |---------|-----------|---------------|-----------|------------|
 | Difficulty | ⭐ Easy | ⭐⭐ Medium | ⭐⭐⭐ Advanced | ⭐⭐ Medium |
-| Time to Deploy | 30 min | 20 min | 15 min | 10 min |
-| Cost (monthly) | $150 | $150-200 | $150+ | $5-50 |
+| Time to Deploy | 30-40 min | 45-60 min | 15-20 min | 10-15 min |
+| Cost (monthly) | $150-200 | $200-300 | $200-300 | $5-50+ |
 | IaC Tool | eksctl | Terraform | kubectl | Terraform/SAM |
 | Production Ready | No | Yes | Yes | Yes |
 | Multi-Env Support | No | Limited | Yes | Yes |
